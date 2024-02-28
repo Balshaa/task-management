@@ -30,7 +30,7 @@ function App() {
         <Routes>
           {/* Common Pages */}
           <Route
-            path="/"
+            path="/https://github.com/Balshaa/Project-Management-System"
             element={
               <>
                 <Navbar />
