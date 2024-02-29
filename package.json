@@ -1,6 +1,5 @@
 {
   "homepage": "https://github.com/Balshaa/Project-Management-System",
-  "name": "project-management",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,6 +18,7 @@
     "@types/react": "^18.2.57",
     "@types/react-dom": "^18.2.19",
     "@types/react-router-dom": "^5.3.3",
+    "axios": "^1.6.7",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "react": "^18.2.0",

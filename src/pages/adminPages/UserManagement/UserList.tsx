@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Table, Select, Button, Input, Card, Modal, Title, Divider } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import UserForm from './UserForm';
+import axios from 'axios';
 
 const roles = ['All', 'Frontend Developer', 'Backend Developer','Tester'];
 
@@ -39,8 +40,28 @@ const UserList = () => {
     setSelectedRole(value || 'All');
   };
 
+  const fetchdata = ()=>{
+    const username = 'admin@gmail.com';
+    const password = 'P@ssw0rd';
+    const apiUrl = 'https://task-management-opll.onrender.com/api/users/get-users';
+    
+    axios.get(apiUrl, {
+      auth: {
+        username: username,
+        password: password
+      }
+    })
+      .then(function(response) {
+        console.log(response.data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+}
+
   return (
     <div className=" m-6 flex flex-col gap-4">
+      <Button  onClick={fetchdata}></Button>
       <Title order={3}>User List</Title>
         <Divider></Divider>
       <div className=" flex justify-start gap-2 sm:justify-between " style={{ textAlign: 'center' }}>
