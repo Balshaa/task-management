@@ -9,6 +9,7 @@ import About from "./pages/commonPages/About";
 import Footer from "./components/Footer";
 import Contact from "./pages/commonPages/Contact";
 import Project from "./pages/commonPages/Projects";
+import Counte from "./pages/commonPages/StateTry"; 
 
 //Admin
 import AdminHome from "./pages/adminPages/AdminHome";
@@ -26,18 +27,11 @@ import DeveloperNavbar from "./pages/developerPages/DeveloperNavbar";
 function App() {
   return (
     <div className="App">
+      <Counte />
       <Router>
-        <Routes>
+      
+         <Routes>
           {/* Common Pages */}
-          <Route
-            path="/Project-Management-System"
-            element={
-              <>
-                <Navbar />
-                <Home />
-              </>
-            }
-          />
           <Route
             path="/"
             element={

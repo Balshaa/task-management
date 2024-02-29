@@ -1,10 +1,10 @@
-// store.js
 import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from '../slice/counterSlice'; // Assuming you have a counterSlice.js file
 
 const store = configureStore({
-  // Specify your reducer(s) here
   reducer: {
-    // Your reducers go here
+    counter: counterReducer,
+    // You can add other reducers here if needed
   },
 });
 

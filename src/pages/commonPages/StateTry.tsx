@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../../redux/slice/counterSlice';
+import { Button } from '@mantine/core';
 
 interface CounterState {
   counter: number;
@@ -13,8 +15,8 @@ const Counter = () => {
   return (
     <div>
       <p>Counter: {counter}</p>
-      <button onClick={() => dispatch(increment())}>Increment</button>
-      <button onClick={() => dispatch(decrement())}>Decrement</button>
+      <Button onClick={() => dispatch(increment())}>Increment</Button>
+      <Button onClick={() => dispatch(decrement())}>Decrement</Button>
     </div>
   );
 };
