@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Project-Management-System/static/css/main.a2fe6300.css",
+    "main.js": "/Project-Management-System/static/js/main.a7220571.js",
+    "static/media/profileimg3.png": "/Project-Management-System/static/media/profileimg3.9cfef914024a33b58772.png",
+    "index.html": "/Project-Management-System/index.html",
+    "main.a2fe6300.css.map": "/Project-Management-System/static/css/main.a2fe6300.css.map",
+    "main.a7220571.js.map": "/Project-Management-System/static/js/main.a7220571.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a2fe6300.css",
+    "static/js/main.a7220571.js"
+  ]
+}
