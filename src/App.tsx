@@ -14,7 +14,6 @@ import Project from "./pages/commonPages/Projects";
 import AdminHome from "./pages/adminPages/AdminHome";
 import AdminNavbar from "./pages/adminPages/AdminNavbar";
 import UserList from "./pages/adminPages/UserManagement/UserList";
-import ProjectList from "./pages/commonPages/ProjectList";
 import ProjectListT from "./pages/adminPages/projectManagement/ProjectListT";
 import ProjectDetail from "./pages/adminPages/projectManagement/ProjectDetail";
 import TaskList from "./pages/adminPages/taskManagement/TaskList";
@@ -86,7 +85,7 @@ function App() {
                   <Route path="/" element={<AdminHome />} />
                   <Route path="/UserList" element={<UserList />} />
                   <Route path="/Projects" element={<ProjectListT />} />
-                  <Route path="/ProjectDetail" element={<ProjectDetail />} />
+                  <Route path="/ProjectDetail/:id" element={<ProjectDetail />} />
                   <Route path="/Tasks" element={<TaskList />} />
                 </Routes>
               </>

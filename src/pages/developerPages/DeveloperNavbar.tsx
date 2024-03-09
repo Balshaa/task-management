@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import pms from "../../images/pms.png"
 import profileImage from "../../images/profileimg3.png"
+import { useNavigate } from 'react-router-dom'
 
 const navigation = [
   { name: 'Home', href: '/Developer', current: true },
@@ -14,6 +15,11 @@ function classNames(...classes: string[]) {
 }
 
 export default function DeveloperNavbar() {
+  const navigate = useNavigate();
+  const Logout = () => {
+    localStorage.removeItem("accessToken"); // Clear the access token from local storage
+    navigate("/"); 
+  };
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -114,7 +120,7 @@ export default function DeveloperNavbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                          onClick={Logout}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out

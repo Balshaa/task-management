@@ -13,11 +13,7 @@ const ProjectList = () => {
         {/* Searchbar and Add Button */}
          <div className=" flex justify-start gap-2 sm:justify-between " style={{ textAlign: 'center' }}>
         <TextInput style={{backgroundColor: '#f2f2f2'}} name='search'  onChange={(e) => setSearch(e.target.value)}   placeholder='Search...'  />
-      <Modal opened={opened} onClose={close} size="auto" title="Project Registration">
-        <ProjectForm />
-      </Modal>
-
-      <Button onClick={open}>Add</Button>
+     
       </div>
   {/* Project List one section or row */}
       <div className="flex flex-col sm:flex-row gap-10 mt-6">

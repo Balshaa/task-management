@@ -1,27 +1,34 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Button, Fieldset, Group, Select, TextInput, Textarea } from "@mantine/core";
+import {
+  Button,
+  Fieldset,
+  Group,
+  Select,
+  TextInput,
+  Textarea,
+} from "@mantine/core";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 interface FormData {
-  Title: string;
-  Description: string;
-  Email: string;
-  PhoneNumber: number;
- 
+  title: string;
+  description: string;
+}
+
+interface ProjectFormProps {
+  handleCloseModal: () => void;
 }
 
 const schema = yup
   .object({
-    Title: yup.string().required(),
-    Description: yup.string().required(),
-    Email: yup.string().email().required(),
-    PhoneNumber: yup.number().typeError("Valid Phone is required").positive().integer().required("Valid Phone is required"),
+    title: yup.string().required(),
+    description: yup.string().required(),
   })
   .required();
 
-
-const ProjectForm = () => {
+const ProjectForm = ({ handleCloseModal }: ProjectFormProps) => {
   const {
     register,
     handleSubmit,
@@ -30,49 +37,60 @@ const ProjectForm = () => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const apiData = {
+        ...data,
+        isActive: true,
+      };
 
-  console.log(watch("Title")); // watch input value by passing the name of it
+      const res = await axios.post(
+        "https://task-management-opll.onrender.com/api/projects/create-project",
+        apiData,
+        config
+      );
+      // Handle the response as needed
+      console.log(res);
+      Swal.fire(
+        "Registered!",
+        "You have been sucessfully register Project.",
+        "success"
+      );
+      handleCloseModal();
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(data);
+  };
+
+  console.log(watch("title")); // watch input value by passing the name of it
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Fieldset variant="filled">
-          <Group justify="flex">
-            <div className="flex flex-col">
-            <TextInput
-              label="Title"
-              placeholder="Title"
-             
-              {...register("Title")} />
-              <p className="text-red-500">{errors.Title?.message}</p>
-              </div>
-              <div className="flex flex-col">
-            <Textarea label="Description" placeholder="Description"
-            {...register("Description")} />
-            <p className="text-red-500">{errors.Description?.message}</p>
-            </div>
-            </Group>
-          <Group justify="flex">
           <div className="flex flex-col">
-            <TextInput label="Email" placeholder="Email" mt="md" 
-            {...register("Email")} />
-            <p className="text-red-500">{errors.Email?.message}</p>
-            </div>
-            <div className="flex flex-col">
             <TextInput
-              label="Phone Number"
-              placeholder="Phone Number"
-              {...register("PhoneNumber")} />
-              <p className="text-red-500">{errors.PhoneNumber?.message}</p>
-              </div>
-          </Group>
-          <Select
-            label="Role"
-            placeholder="Pick role"
-            data={["Front_end developer", "Back_end  Developer", "Tester", "Other"]}
-          />
-
+              label="title"
+              placeholder="title"
+              {...register("title")}
+            />
+            <p className="text-red-500">{errors.title?.message}</p>
+          </div>
+          <div className="flex flex-col">
+            <Textarea
+              label="description"
+              placeholder="description"
+              {...register("description")}
+            />
+            <p className="text-red-500">{errors.description?.message}</p>
+          </div>
           <Group justify="flex-end" mt="md">
             <Button type="submit">Submit</Button>
           </Group>
@@ -80,6 +98,6 @@ const ProjectForm = () => {
       </form>
     </div>
   );
-}
+};
 
-export default ProjectForm
+export default ProjectForm;

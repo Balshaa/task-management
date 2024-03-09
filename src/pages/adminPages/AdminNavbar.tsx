@@ -1,22 +1,27 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import pms from "../../images/pms.png"
-import profileImage from "../../images/profileimg3.png"
-
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import pms from "../../images/pms.png";
+import profileImage from "../../images/profileimg3.png";
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
-  { name: 'Home', href: '/Admin', current: true },
-  { name: 'Users', href: '/Admin/UserList', current: false },
-  { name: 'Projects', href: '/Admin/Projects', current: false },
-  { name: 'Tasks', href: '/Admin/Tasks', current: false },
-]
+  { name: "Home", href: "/Admin", current: true },
+  { name: "Users", href: "/Admin/UserList", current: false },
+  { name: "Projects", href: "/Admin/Projects", current: false },
+  { name: "Tasks", href: "/Admin/Tasks", current: false },
+];
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function AdminNavbar() {
+  const navigate = useNavigate();
+  const Logout = () => {
+    localStorage.removeItem("accessToken"); // Clear the access token from local storage
+    navigate("/"); 
+  };
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -37,11 +42,7 @@ export default function AdminNavbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto rounded"
-                    src={pms}
-                    alt="PMS"
-                  />
+                  <img className="h-8 w-auto rounded" src={pms} alt="PMS" />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -50,10 +51,12 @@ export default function AdminNavbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
@@ -98,7 +101,10 @@ export default function AdminNavbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Your Profile
                           </a>
@@ -108,7 +114,10 @@ export default function AdminNavbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Settings
                           </a>
@@ -117,8 +126,11 @@ export default function AdminNavbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            onClick={Logout}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Sign out
                           </a>
@@ -139,10 +151,12 @@ export default function AdminNavbar() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -152,5 +166,5 @@ export default function AdminNavbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
